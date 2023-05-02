@@ -218,6 +218,7 @@ type DurationLabelFilter struct {
 	Value        time.Duration
 	Type         LabelFilterType
 	QuantityType string
+	LiteralValue string
 }
 
 // NewDurationLabelFilter creates a new label filterer which parses duration string representation (5s)
@@ -228,6 +229,7 @@ func NewDurationLabelFilter(t LabelFilterType, name string, d time.Duration) *Du
 		Type:         t,
 		Value:        d,
 		QuantityType: "duration",
+		LiteralValue: d.String(),
 	}
 }
 
