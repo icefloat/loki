@@ -147,18 +147,20 @@ func ReduceAndLabelFilter(filters []LabelFilterer) LabelFilterer {
 }
 
 type BytesLabelFilter struct {
-	Name  string
-	Value uint64
-	Type  LabelFilterType
+	Name         string
+	Value        uint64
+	Type         LabelFilterType
+	QuantityType string
 }
 
 // NewBytesLabelFilter creates a new label filterer which parses bytes string representation (1KB) from the value of the named label
 // And compares it with the given b value.
 func NewBytesLabelFilter(t LabelFilterType, name string, b uint64) *BytesLabelFilter {
 	return &BytesLabelFilter{
-		Name:  name,
-		Type:  t,
-		Value: b,
+		Name:         name,
+		Type:         t,
+		Value:        b,
+		QuantityType: "bytes",
 	}
 }
 
@@ -212,18 +214,20 @@ func (d *BytesLabelFilter) String() string {
 }
 
 type DurationLabelFilter struct {
-	Name  string
-	Value time.Duration
-	Type  LabelFilterType
+	Name         string
+	Value        time.Duration
+	Type         LabelFilterType
+	QuantityType string
 }
 
 // NewDurationLabelFilter creates a new label filterer which parses duration string representation (5s)
 // from the value of the named label And compares it with the given d value.
 func NewDurationLabelFilter(t LabelFilterType, name string, d time.Duration) *DurationLabelFilter {
 	return &DurationLabelFilter{
-		Name:  name,
-		Type:  t,
-		Value: d,
+		Name:         name,
+		Type:         t,
+		Value:        d,
+		QuantityType: "duration",
 	}
 }
 
@@ -271,19 +275,21 @@ func (d *DurationLabelFilter) String() string {
 }
 
 type NumericLabelFilter struct {
-	Name  string
-	Value float64
-	Type  LabelFilterType
-	err   error
+	Name         string
+	Value        float64
+	Type         LabelFilterType
+	QuantityType string
+	err          error
 }
 
 // NewNumericLabelFilter creates a new label filterer which parses float64 string representation (5.2)
 // from the value of the named label And compares it with the given f value.
 func NewNumericLabelFilter(t LabelFilterType, name string, v float64) *NumericLabelFilter {
 	return &NumericLabelFilter{
-		Name:  name,
-		Type:  t,
-		Value: v,
+		Name:         name,
+		Type:         t,
+		Value:        v,
+		QuantityType: "number",
 	}
 }
 

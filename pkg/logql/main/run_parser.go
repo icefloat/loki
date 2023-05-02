@@ -15,8 +15,6 @@ type TemplateWrapper struct {
 }
 
 func (tw *TemplateWrapper) MarshalJSON() ([]byte, error) {
-	type Alias TemplateWrapper
-
 	// Convert the parse.Tree into a JSON-compatible format.
 	slice := serializeNodes([]map[string]interface{}{}, tw.Root.Nodes)
 	return json.Marshal(slice)
@@ -89,6 +87,10 @@ func main() {
 	v := &TemplateWrapper{tmpl}
 	marshalled, err := json.Marshal(v)
 	println(string(marshalled))
+
+	//expr, _ := syntax.ParseExpr("{container_name=\"grafana\"} |= \"Request Completed\" | logfmt | duration > 5B")
+	//marshalled, _ := json.Marshal(expr)
+	//println(string(marshalled))
 }
 
 //export toTemplateAST
